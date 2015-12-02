@@ -7,8 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+<header>
+  <div class="container">
+    <div id="logo">
+      <%= image_tag("logo.png") %>
+    </div>
+    <div id="blog-name">
+      <h1>Блог о рельсах и на рельсах</h1>
+    </div>
+  </div>
+</header>
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Меню</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li><a href="<%= root_path %>">Главная</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>
