@@ -1,20 +1,17 @@
-<p id="notice"><%= notice %></p>
+<% title @post.title %>
+<% breadcrumb :post, @post %>
+<div class="post">
+  <h2><%= @post.title %></h2>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+  <div class="text-muted post-info">
+    <span>Дата публикации: <%= l @post.created_at.to_date %></span>
+    <span>Кол-во комментариев: <%= %></span>
+  </div>
 
-<p>
-  <strong>Announcement:</strong>
-  <%= @post.announcement %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<%= link_to 'New Post', new_post_path %> |
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+  <div class="post-content">
+    <%= markdown @post.content %>
+  </div>
+</div>
+<% if can? :update, @post %>
+    <%= link_to 'Edit', edit_post_path(@post) %>
+<% end %>

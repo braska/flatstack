@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  resources :posts, :except => [:index]
+  post '' => 'posts#create'
+  resources :posts, :except => [:index, :new, :create, :destroy, :edit]
+
+
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'login' => 'devise/sessions#new', :as => :new_user_session
+    post 'login' => 'devise/sessions#create', :as => :user_session
+    match 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session, :via => Devise.mappings[:user].sign_out_via
+  end
+
+  namespace :admin, as: nil do
+    resources :posts, :only => [:new, :create, :destroy, :edit]
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

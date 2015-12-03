@@ -33,6 +33,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "redcarpet"
 gem 'russian'
+gem "gretel"
+gem 'devise'
+gem "cancan"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

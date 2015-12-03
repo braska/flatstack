@@ -3,57 +3,64 @@
 @import "./*";
 
 header {
-    background-color: #930D01;
-    padding: 10px 0;
+  background-color: #930D01;
+  padding: 10px 0;
 
-    #logo, #blog-name {
-        @media (min-width: $screen-md-min) {
-            display: inline-block;
-            text-align: left;
-        }
-        text-align: center;
+  #logo, #blog-name {
+    @media (min-width: $screen-md-min) {
+      display: inline-block;
+      text-align: left;
     }
-    
-    #blog-name {
-        h1 {
-            font-size: 30px;
-            font-weight: bold;
-            color: white;
-            @media (min-width: $screen-md-min) {
-                line-height: 70px;
-            }
-            margin: 15px;
-        }
+    text-align: center;
+  }
+
+  #blog-name {
+    h1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+      @media (min-width: $screen-md-min) {
+        line-height: 70px;
+      }
+      margin: 15px;
     }
-    
-    #logo {
-        img {
-            height: 100px;
-        }
+  }
+
+  #logo {
+    img {
+      height: 100px;
     }
+  }
 }
 
 @media (min-width: $screen-sm-min) {
-    .pull-right-sm {
-      float: right;
-    }
-    .pull-left-sm {
-      float: left;
-    }
+  .pull-right-sm {
+    float: right;
+  }
+  .pull-left-sm {
+    float: left;
+  }
 }
+
 @media (min-width: $screen-md-min) {
-    .pull-right-md {
-      float: right;
-    }
-    .pull-left-md {
-      float: left;
-    }
+  .pull-right-md {
+    float: right;
+  }
+  .pull-left-md {
+    float: left;
+  }
+
+  .navbar-nav > li > a {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
 }
+
 @media (min-width: $screen-lg-min) {
-    .pull-right-lg {
-      float: right;
-    }
-    .pull-left-md {
-      float: left;
-    }
+  .pull-right-lg {
+    float: right;
+  }
+  .pull-left-md {
+    float: left;
+  }
 }

@@ -12,3 +12,6 @@
 !/log/.keep
 /tmp
 /spring-1000
+
+/.idea/
+/*.iml

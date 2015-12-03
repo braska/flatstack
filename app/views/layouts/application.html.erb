@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title><%= yield(:title) %> :: Блог</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if user_signed_in? and current_user.role? :admin %>
+    <%= render partial: 'admin/shared/menu' %>
+<% end %>
 <header>
   <div class="container">
     <div id="logo">
@@ -31,12 +34,32 @@
       <ul class="nav navbar-nav">
         <li><a href="<%= root_path %>">Главная</a></li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <% unless user_signed_in? %>
+              <%= link_to new_user_session_path do %>
+                  <i class="glyphicon glyphicon-log-in"></i> Войти
+              <% end %>
+          <% else %>
+              <%= link_to destroy_user_session_path do %>
+                  <i class="glyphicon glyphicon-log-out"></i> Выйти
+              <% end %>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
 <div class="container">
-  <%= yield %>
+  <%= breadcrumbs style: :bootstrap %>
+  <%= content_for?(:content) ? yield(:content) : yield %>
 </div>
+<hr>
+<footer>
+  <div class="container">
+    &copy; 2015
+  </div>
+</footer>
 
 </body>
 </html>
