@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top admin-navbar">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#admin-navbar" aria-expanded="false">
@@ -7,6 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <p class="navbar-text">Административная панель</p>
     </div>
 
     <div class="collapse navbar-collapse" id="admin-navbar">
@@ -14,12 +15,15 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Посты <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<%= new_post_path %>>"><i class="glyphicon glyphicon-plus"></i> Новый пост</a></li>
+            <li><a href="<%= new_admin_post_path %>"><i class="glyphicon glyphicon-plus"></i> Новый пост</a></li>
           </ul>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <% if admin_zone? %>
+            <li><a href="<%= root_path %>"><i class="glyphicon glyphicon-share"></i> На сайт</a></li>
+        <% end %>
         <li>
           <%= link_to(destroy_user_session_path, :method => :delete) do %>
             <i class="glyphicon glyphicon-off"></i> Выйти

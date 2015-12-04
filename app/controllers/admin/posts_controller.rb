@@ -23,6 +23,9 @@ class Admin::PostsController < Admin::AdminController
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+      if @post.errors.any?
+        flash[:error] = @post.errors.full_messages
+      end
     end
   end
 
@@ -37,6 +40,9 @@ class Admin::PostsController < Admin::AdminController
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+      if @post.errors.any?
+        flash[:error] = @post.errors.full_messages
+      end
     end
   end
 
@@ -45,19 +51,19 @@ class Admin::PostsController < Admin::AdminController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to admin_pages_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_admin_page
+    def set_post
       @post = Post.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params[:post]
+      params[@post]
     end
 end

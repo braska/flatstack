@@ -4,14 +4,9 @@ Rails.application.routes.draw do
   resources :posts, :except => [:index, :new, :create, :destroy, :edit]
 
 
-  devise_for :users, :skip => [:sessions]
-  as :user do
-    get 'login' => 'devise/sessions#new', :as => :new_user_session
-    post 'login' => 'devise/sessions#create', :as => :user_session
-    match 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session, :via => Devise.mappings[:user].sign_out_via
-  end
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'registration' }
 
-  namespace :admin, as: nil do
+  namespace :admin do
     resources :posts, :only => [:new, :create, :destroy, :edit]
   end
 

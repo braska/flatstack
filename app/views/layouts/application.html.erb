@@ -3,7 +3,6 @@
 <head>
   <title><%= yield(:title) %> :: Блог</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -13,7 +12,9 @@
 <header>
   <div class="container">
     <div id="logo">
-      <%= image_tag("logo.png") %>
+      <%= link_to root_path do %>
+        <%= image_tag("logo.png") %>
+      <% end %>
     </div>
     <div id="blog-name">
       <h1>Блог о рельсах и на рельсах</h1>
@@ -35,17 +36,27 @@
         <li><a href="<%= root_path %>">Главная</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
+
           <% unless user_signed_in? %>
+            <li>
               <%= link_to new_user_session_path do %>
                   <i class="glyphicon glyphicon-log-in"></i> Войти
               <% end %>
+            </li>
           <% else %>
-              <%= link_to destroy_user_session_path do %>
-                  <i class="glyphicon glyphicon-log-out"></i> Выйти
-              <% end %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="<%= edit_user_registration_path %>">Настройки</a></li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                      <i class="glyphicon glyphicon-log-out"></i> Выйти
+                  <% end %>
+                </li>
+              </ul>
+            </li>
           <% end %>
-        </li>
       </ul>
     </div>
   </div>
@@ -60,6 +71,6 @@
     &copy; 2015
   </div>
 </footer>
-
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
 </body>
 </html>

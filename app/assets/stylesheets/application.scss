@@ -50,7 +50,7 @@ header {
     float: left;
   }
 
-  .navbar-nav > li > a {
+  header + .navbar .navbar-nav > li > a {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
   }
@@ -63,4 +63,8 @@ header {
   .pull-left-md {
     float: left;
   }
+}
+
+.admin-navbar {
+  margin-bottom: 0;
 }

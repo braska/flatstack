@@ -2,14 +2,16 @@
 <html>
 <head>
   <title><%= yield(:title) %> :: Панель администратора</title>
-  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= stylesheet_link_tag 'admin', media: 'all' %>
   <%= javascript_include_tag 'admin' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 <%= render partial: 'admin/shared/menu' %>
-
-<%= content_for?(:content) ? yield(:content) : yield %>
-
+<div class="container">
+  <h1><%= yield(:title) %></h1>
+  <%= flash_messages %>
+  <%= content_for?(:content) ? yield(:content) : yield %>
+</div>
 </body>
 </html>
