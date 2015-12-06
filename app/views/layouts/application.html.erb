@@ -43,6 +43,11 @@
                   <i class="glyphicon glyphicon-log-in"></i> Войти
               <% end %>
             </li>
+            <li>
+              <%= link_to new_user_registration_path do %>
+                  <i class="glyphicon glyphicon-plus"></i> Регистрация
+              <% end %>
+            </li>
           <% else %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %> <span class="caret"></span></a>

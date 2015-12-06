@@ -35,5 +35,9 @@ class Ability
     else
       can :read, :all
     end
+
+    can :destroy, PostComment do |comment|
+      comment.user_id == user.id
+    end
   end
 end

@@ -8,7 +8,8 @@ module ApplicationHelper
         lax_html_blocks: true,
         strikethrough: true,
         superscript: true,
-        space_after_headers: true
+        space_after_headers: true,
+        tables: true
     }
     Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
@@ -41,5 +42,10 @@ module ApplicationHelper
 
   def admin_zone?
     controller.class.name.split("::").first=="Admin"
+  end
+
+  def avatar_url(user)
+    gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+    "http://gravatar.com/avatar/#{gravatar_id}.png"
   end
 end

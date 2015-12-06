@@ -33,7 +33,7 @@ class Admin::PostsController < Admin::AdminController
   # PATCH/PUT /admin/posts/1.json
   def update
     respond_to do |format|
-      if @post.update(admin_page_params)
+      if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -64,6 +64,6 @@ class Admin::PostsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params[@post]
+      params.require(:post).permit(:title, :announcement, :content)
     end
 end

@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   root 'posts#index'
   post '' => 'posts#create'
-  resources :posts, :except => [:index, :new, :create, :destroy, :edit]
+  resources :posts, :except => [:index, :new, :create, :destroy, :edit, :update]
+  resources :post_comments, :only => [:create, :destroy]
 
 
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'registration' }
 
   namespace :admin do
-    resources :posts, :only => [:new, :create, :destroy, :edit]
+    resources :posts, :only => [:new, :create, :destroy, :edit, :update]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
