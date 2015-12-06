@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %> :: Блог</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if user_signed_in? and current_user.role? :admin %>
+    <%= render partial: 'admin/shared/menu' %>
+<% end %>
+<header>
+  <div class="container">
+    <div id="logo">
+      <%= link_to root_path do %>
+        <%= image_tag("logo.png") %>
+      <% end %>
+    </div>
+    <div id="blog-name">
+      <h1>Блог о рельсах и на рельсах</h1>
+    </div>
+  </div>
+</header>
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="sr-only">Меню</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        <li><a href="<%= root_path %>">Главная</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
+          <% unless user_signed_in? %>
+            <li>
+              <%= link_to new_user_session_path do %>
+                  <i class="glyphicon glyphicon-log-in"></i> Войти
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path do %>
+                  <i class="glyphicon glyphicon-plus"></i> Регистрация
+              <% end %>
+            </li>
+          <% else %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="<%= edit_user_registration_path %>">Настройки</a></li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                      <i class="glyphicon glyphicon-log-out"></i> Выйти
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <%= breadcrumbs style: :bootstrap %>
+  <%= content_for?(:content) ? yield(:content) : yield %>
+</div>
+<hr>
+<footer>
+  <div class="container">
+    &copy; 2015
+  </div>
+</footer>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
+</body>
+</html>

@@ -1,0 +1,76 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "./*";
+
+header {
+  background-color: #930D01;
+  padding: 10px 0;
+
+  #logo, #blog-name {
+    @media (min-width: $screen-md-min) {
+      display: inline-block;
+      text-align: left;
+    }
+    text-align: center;
+  }
+
+  #blog-name {
+    h1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+      @media (min-width: $screen-md-min) {
+        line-height: 70px;
+      }
+      margin: 15px;
+    }
+  }
+
+  #logo {
+    img {
+      height: 100px;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .pull-right-sm {
+    float: right;
+  }
+  .pull-left-sm {
+    float: left;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .pull-right-md {
+    float: right;
+  }
+  .pull-left-md {
+    float: left;
+  }
+
+  header + .navbar .navbar-nav > li > a {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .pull-right-lg {
+    float: right;
+  }
+  .pull-left-md {
+    float: left;
+  }
+}
+
+.admin-navbar {
+  margin-bottom: 0;
+}
+
+.none {
+  font-style: italic;
+  padding: 20px 0;
+  text-align: center;
+}

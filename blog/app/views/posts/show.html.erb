@@ -1,0 +1,49 @@
+<% title @post.title %>
+<% breadcrumb :post, @post %>
+<div class="post">
+  <h2><%= @post.title %></h2>
+
+  <div class="text-muted post-info">
+    <span>Дата публикации: <%= l @post.created_at.to_date %></span>
+    <span>Кол-во комментариев: <%= @post.comments.count %></span></span>
+  </div>
+
+  <div class="post-content">
+    <%= markdown @post.content %>
+  </div>
+</div>
+<% if can? :update, @post %>
+    <%= link_to 'Редактировать', edit_admin_post_path(@post), class: "btn btn-success" %>
+<% end %>
+<hr>
+<h3>Комментарии</h3>
+<%= flash_messages %>
+<%= form_for(@post.comments.new) do |f| %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <div class="form-group">
+      <%= f.text_area :content, class: "form-control", rows: 5 %>
+    </div>
+    <%= f.submit "Отправить", class: "btn btn-default" %>
+<% end %>
+<% if @post.comments.all.empty? %>
+    <p class="none">Нет комментариев</p>
+<% else %>
+    <% @post.comments.all.each do |comment| %>
+        <hr>
+        <div class="row">
+          <div class="col-sm-2">
+            <img src="<%= avatar_url comment.user %>?s=300" class="img-thumbnail img-responsive">
+          </div>
+          <div class="col-sm-10">
+            <h3><%= comment.user.email %></h3>
+            <p class="text-muted"><%= l comment.created_at.to_date %></p>
+            <%= comment.content %>
+            <% if can? :destroy, comment %>
+                <%= link_to comment,  method: :delete, data: { confirm: 'Вы уверены?' }, class: "btn btn-danger"  do %>
+                    <i class="glyphicon glyphicon-trash"></i> Удалить
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+<% end %>

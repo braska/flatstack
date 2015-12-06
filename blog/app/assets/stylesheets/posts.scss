@@ -1,0 +1,14 @@
+.post {
+    .post-title a {
+        color: $text-color;
+        text-decoration: none !important;
+    }
+    
+    .post-info {
+        margin-bottom: 10px;
+        
+        span {
+            margin-right: 15px;
+        }
+    }
+}
